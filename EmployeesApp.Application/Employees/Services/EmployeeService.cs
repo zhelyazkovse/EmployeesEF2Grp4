@@ -1,6 +1,6 @@
 ﻿using EmployeesApp.Application.Employees.Interfaces;
 using EmployeesApp.Domain.Entities;
-
+using System.Linq;
 namespace EmployeesApp.Application.Employees.Services;
 
 public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
@@ -9,16 +9,21 @@ public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployee
     {
         employee.Name = ToInitalCapital(employee.Name);
         employee.Email = employee.Email.ToLower();
-        employeeRepository.Add(employee);
+        employeeRepository.AddAsync(employee);
     }
 
     string ToInitalCapital(string s) => $"{s[..1].ToUpper()}{s[1..]}";
 
-    public Employee[] GetAllAsync() => [.. employeeRepository.GetAll().OrderBy(e => e.Name)];
-
-    public Employee? GetByIdAsync(int id)
+    public async Task<Employee[]> GetAllAsync()
     {
-        Employee? employee = employeeRepository.GetById(id);
+        Employee[] employees = await employeeRepository.GetAllAsync();
+            
+           return employees.OrderBy(e => e.Name).ToArray();
+    }
+
+    public async Task<Employee?> GetByIdAsync(int id)
+    {
+        Employee? employee = await employeeRepository.GetByIdAsync(id);
 
         return employee is null ?
             throw new ArgumentException($"Invalid parameter value: {id}", nameof(id)) :

@@ -2,16 +2,12 @@
 using EmployeesApp.Application.Employees.Interfaces;
 using EmployeesApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace EmployeesApp.Infrastructure.Persistance.Repositories
 {
     public class EmployeeRepository(ApplicationContext context) : IEmployeeRepository
     {
-        public void Add(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
-        
         public async Task AddAsync(Employee employee)
         {
             context.Employees?.AddAsync(employee);

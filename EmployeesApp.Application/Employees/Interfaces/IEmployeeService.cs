@@ -6,9 +6,9 @@ public interface IEmployeeService
 {
     void Add(Employee employee);
 
-    Employee[] GetAllAsync();
+    Task<Employee[]> GetAllAsync();
 
-    Employee? GetByIdAsync(int id);
+    Task<Employee?> GetByIdAsync(int id);
 
     public bool CheckIsVIP(Employee employee);
 }
