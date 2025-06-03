@@ -10,12 +10,12 @@ public class OtherEmployeeService(IEmployeeRepository employeeRepository) : IEmp
         employeeRepository.Add(employee);
     }
 
-    public Employee[] GetAll()
+    public Employee[] GetAllAsync()
     {
         return employeeRepository.GetAll();
     }
 
-    public Employee? GetById(int id) => employeeRepository.GetById(id);
+    public Employee? GetByIdAsync(int id) => employeeRepository.GetById(id);
 
     public bool CheckIsVIP(Employee employee) =>
         employee.Email.StartsWith("ADMIN", StringComparison.CurrentCultureIgnoreCase);

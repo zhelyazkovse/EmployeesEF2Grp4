@@ -18,7 +18,7 @@ public class EmployeesControllerTests
     {
         //Arrange
         var employeeService = new Mock<IEmployeeService>();
-        employeeService.Setup(service => service.GetAll())
+        employeeService.Setup(service => service.GetAllAsync())
             .Returns([
                 new Employee{Email = "gmail@gmail.com", Name = "Pär"},
                 new Employee{Email = "email@email.com", Name = "Name"},
@@ -97,7 +97,7 @@ public class EmployeesControllerTests
         };
 
         employeeService
-            .Setup(service => service.GetById(1))
+            .Setup(service => service.GetByIdAsync(1))
             .Returns(employee);
 
         //Act
@@ -105,6 +105,6 @@ public class EmployeesControllerTests
 
         //Assert
         Assert.IsType<ViewResult>(result);
-        employeeService.Verify(s => s.GetById(1), Times.Once);
+        employeeService.Verify(s => s.GetByIdAsync(1), Times.Once);
     }
 }

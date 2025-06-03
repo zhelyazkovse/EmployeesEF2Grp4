@@ -14,9 +14,9 @@ public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployee
 
     string ToInitalCapital(string s) => $"{s[..1].ToUpper()}{s[1..]}";
 
-    public Employee[] GetAll() => [.. employeeRepository.GetAll().OrderBy(e => e.Name)];
+    public Employee[] GetAllAsync() => [.. employeeRepository.GetAll().OrderBy(e => e.Name)];
 
-    public Employee? GetById(int id)
+    public Employee? GetByIdAsync(int id)
     {
         Employee? employee = employeeRepository.GetById(id);
 

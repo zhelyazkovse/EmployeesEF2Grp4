@@ -42,7 +42,7 @@ public class EmployeeServiceTests
         var service = new EmployeeService(mockRepo.Object);
 
         // Act
-        var result = service.GetById(1);
+        var result = service.GetByIdAsync(1);
 
         // Assert
         Assert.Equal(employee, result);
@@ -64,7 +64,7 @@ public class EmployeeServiceTests
         //Assert.Equal("Invalid parameter value: 999 (Parameter 'id')", ex.Message);
 
         // Act
-        var result = Record.Exception(() => service.GetById(999));
+        var result = Record.Exception(() => service.GetByIdAsync(999));
 
         // Assert
         Assert.IsType<ArgumentException>(result);

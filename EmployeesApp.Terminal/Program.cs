@@ -34,7 +34,7 @@ internal class Program
 
     private static void ListAllEmployees()
     {
-        foreach (var item in employeeService.GetAll())
+        foreach (var item in employeeService.GetAllAsync())
             Console.WriteLine(item.Name);
 
         Console.WriteLine("------------------------------");
@@ -46,7 +46,7 @@ internal class Program
 
         try
         {
-            employee = employeeService.GetById(employeeID);
+            employee = employeeService.GetByIdAsync(employeeID);
             Console.WriteLine($"{employee?.Name}: {employee?.Email}");
             Console.WriteLine("------------------------------");
         }
