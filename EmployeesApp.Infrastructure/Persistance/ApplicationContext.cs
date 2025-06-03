@@ -15,6 +15,8 @@ public class ApplicationContext(DbContextOptions<ApplicationContext> options)
 {
     public DbSet<Employee> Employees { get; set; } = null!;
 
+    public DbSet<Company> Companies { get; set; } = null!;
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -30,7 +32,6 @@ public class ApplicationContext(DbContextOptions<ApplicationContext> options)
             .HasColumnType(SqlDbType.Money.ToString())
             .HasDefaultValue(0m)
             .IsRequired();
-
 
         modelBuilder.Entity<Employee>().HasData(
             new Employee()
