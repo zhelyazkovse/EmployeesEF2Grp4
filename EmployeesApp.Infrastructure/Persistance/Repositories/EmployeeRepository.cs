@@ -7,6 +7,11 @@ namespace EmployeesApp.Infrastructure.Persistance.Repositories
 {
     public class EmployeeRepository(ApplicationContext context) : IEmployeeRepository
     {
+        public void Add(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
         //readonly List<Employee> employees =
         //[
         //    new Employee()
@@ -47,10 +52,20 @@ namespace EmployeesApp.Infrastructure.Persistance.Repositories
             await context.SaveChangesAsync(); // Inte glömma!
         }
 
+        public Employee[] GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         //Classic C# syntax for GetAll()
         public async Task<Employee[]> GetAllAsync()
         {
             return await context.Employees.ToArrayAsync();
+        }
+
+        public Employee? GetById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task <Employee?> GetByIdAsync(int id)
