@@ -1,21 +1,27 @@
 ﻿using EmployeesApp.Application.Employees.Interfaces;
 using EmployeesApp.Domain.Entities;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EmployeesApp.Application.Employees.Services;
 
 public class OtherEmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
 {
-    public void Add(Employee employee)
+    public async Task AddAsync(Employee employee)
     {
-        employeeRepository.AddAsync(employee);
+        await employeeRepository.AddAsync(employee);
     }
 
-    public Employee[] GetAllAsync()
+    public async Task<Employee[]> GetAllAsync()
     {
-        return employeeRepository.GetAllAsync();
+        var employees = await employeeRepository.GetAllAsync();
+        return employees.OrderBy(e => e.Name).ToArray(); // This is valid!
     }
 
-    public Employee? GetByIdAsync(int id) => employeeRepository.GetByIdAsync(id);
+    public async Task<Employee?> GetByIdAsync(int id)
+    {
+        return await employeeRepository.GetByIdAsync(id);
+    }
 
     public bool CheckIsVIP(Employee employee) =>
         employee.Email.StartsWith("ADMIN", StringComparison.CurrentCultureIgnoreCase);

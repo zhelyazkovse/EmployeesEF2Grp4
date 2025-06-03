@@ -4,7 +4,7 @@ namespace EmployeesApp.Application.Employees.Interfaces;
 
 public interface IEmployeeService
 {
-    void Add(Employee employee);
+    Task AddAsync(Employee employee);
 
     Task<Employee[]> GetAllAsync();
 

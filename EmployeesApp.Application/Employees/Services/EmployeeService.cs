@@ -5,7 +5,7 @@ namespace EmployeesApp.Application.Employees.Services;
 
 public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
 {
-    public void Add(Employee employee)
+    public async Task AddAsync(Employee employee)
     {
         employee.Name = ToInitalCapital(employee.Name);
         employee.Email = employee.Email.ToLower();
@@ -16,14 +16,14 @@ public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployee
 
     public async Task<Employee[]> GetAllAsync()
     {
-        Employee[] employees = await employeeRepository.GetAllAsync();
+        var employees = await employeeRepository.GetAllAsync();
             
            return employees.OrderBy(e => e.Name).ToArray();
     }
 
     public async Task<Employee?> GetByIdAsync(int id)
     {
-        Employee? employee = await employeeRepository.GetByIdAsync(id);
+        var employee = await employeeRepository.GetByIdAsync(id);
 
         return employee is null ?
             throw new ArgumentException($"Invalid parameter value: {id}", nameof(id)) :

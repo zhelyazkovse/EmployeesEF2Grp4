@@ -32,21 +32,22 @@ internal class Program
         ListEmployee(562);
     }
 
-    private static void ListAllEmployees()
+    private static async Task ListAllEmployees()
     {
-        foreach (var item in employeeService.GetAllAsync())
+
+        foreach (var item in await employeeService.GetAllAsync())
             Console.WriteLine(item.Name);
 
         Console.WriteLine("------------------------------");
     }
 
-    private static void ListEmployee(int employeeID)
+    private static async Task ListEmployee(int employeeID)
     {
         Employee? employee;
 
         try
         {
-            employee = employeeService.GetByIdAsync(employeeID);
+            employee = await employeeService.GetByIdAsync(employeeID);
             Console.WriteLine($"{employee?.Name}: {employee?.Email}");
             Console.WriteLine("------------------------------");
         }
